@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import argparse
+import os
 
 
 def process_csv(csv):
@@ -19,17 +20,18 @@ def process_csv(csv):
         df = df.groupby('val').agg({'counts': 'count'})
         # print(df.head())
         rods = df['counts'].sum() - len(df.index)
-        print(df.head())
         #print(df.head())
         print("Number of rods could be removed: ", rods)
 
 
 def main(csv):
-    if csv.lower().endswith('csv'):
-        process_csv(csv)
+    if os.path.isfile(csv):
+        if csv.lower().endswith('csv'):
+            process_csv(csv)
+        else:
+            print("CSV file only!")
     else:
-        print("Number of rods could be removed: ", 0)
-
+        print("File not exists: ", csv)
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
