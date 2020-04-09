@@ -25,7 +25,7 @@ def process_csv(csv):
 
 
 def main(csv):
-    if not csv.lower().endswith('json'):
+    if csv.lower().endswith('csv'):
         process_csv(csv)
     else:
         print("Number of rods could be removed: ", 0)
