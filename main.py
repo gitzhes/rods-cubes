@@ -1,7 +1,8 @@
-import numpy as np
-import pandas as pd
 import argparse
 import os
+
+import numpy as np
+import pandas as pd
 
 
 def process_csv(csv):
@@ -15,12 +16,12 @@ def process_csv(csv):
         df['bv'] = np.where(df['v1'] >= df['v2'], df['v1'], df['v2'])
         df['val'] = df[['sv', 'bv']].astype(str).agg('-'.join, axis=1)
         df = df.drop(['v1', 'v2', 'sv', 'bv'], axis=1)
-        #print(df.head())
+        print(df.head())
         df['counts'] = 0
         df = df.groupby('val').agg({'counts': 'count'})
-        # print(df.head())
+        print(df.head())
         rods = df['counts'].sum() - len(df.index)
-        #print(df.head())
+        print(df.head())
         print("Number of rods could be removed: ", rods)
 
 
